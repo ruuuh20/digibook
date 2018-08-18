@@ -1,6 +1,6 @@
 <h1>This is an app testing</h1>
 <% @books.each do |book| %>
-  <%= book.title %>
+  <%= link_to book.title, book_path(book) %>
 <% end %>
 
 <div class="columns">
@@ -10,3 +10,5 @@
   <div class="column">4</div>
   <div class="column">5</div>
 </div>
+
+<%= link_to "Add new book", new_book_path %>
