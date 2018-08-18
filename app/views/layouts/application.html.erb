@@ -10,12 +10,26 @@
   </head>
 
   <body>
+    <div class="container">
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://bulma.io">
       <%= link_to "DIGIBOOK", root_path %>
     </a>
+    <a class="navbar-item" href="https://bulma.io">
+      <%= link_to "Sign Up", new_user_registration_path %>
+    </a>
+    <% if user_signed_in? %>
+    <a class="navbar-item" href="https://bulma.io">
+      <%= link_to "Sign Out", destroy_user_session_path, :method => "delete" %>
+    </a>
+    <% else %>
+    <a class="navbar-item" href="https://bulma.io">
+      <%= link_to "Log in", new_user_session_path %>
+    </a>
+    <% end %>
+
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
@@ -31,5 +45,7 @@
 
 
     <%= yield %>
+
+    </div>
   </body>
 </html>
