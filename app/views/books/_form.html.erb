@@ -1,20 +1,35 @@
+<div class="container is-fluid">
 <%= form_for @book do |f| %>
   <div class="field">
-    <%= f.label "title" %>
-    <%= f.text_field :title %>
+    <%= f.label "title", :class => "label" %>
+    <div class="control">
+      <%= f.text_field :title, :class => "input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label "Description" %>
-    <%= f.text_area :description %>
+    <%= f.label "Description", :class => "label" %>
+    <div class="control">
+    <%= f.text_area :description, :class => "input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label "Author" %>
-    <%= f.text_field :author %>
+    <%= f.label "Author", :class => "label" %>
+    <div class="control">
+    <%= f.text_field :author, :class => "input" %>
+  </div>
   </div>
 
 
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Add", :class => "button is-link" %>
+    </div>
+    <div class="control">
+      <%= f.submit "Cancel", :class => "button is-text" %>
+    </div>
+  </div>
 
-  <%= f.submit "Add" %>
 <% end  %>
+</div>
