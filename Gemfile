@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem "bulma-rails", "~> 0.7.1"
 gem 'devise'
+gem 'dotenv-rails'
+gem 'faraday'
+gem 'nokogiri'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
