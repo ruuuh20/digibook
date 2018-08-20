@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'open-uri'
 
 class SearchesController < ApplicationController
 
@@ -12,9 +13,30 @@ def goodreads
     req.params['q'] = params[:title]
 
   end
-  @doc  = Nokogiri::XML(@resp.body)
-  @doc = @doc.xpath("//work").text
+  # @doc  = Nokogiri::XML(@resp.body)
+  # @doc.xpath("//work").each do |work|
+  #   [best_book].each do |n|
+  #     puts work.at(n).text
+  #   end
+  # end
+  xml = Nokogiri::XML(@resp.body)
+  # @books = xml.search('work').map do |book|
+  #   %w[
+  #     id average_rating best_book
+  #   ].each_with_object({}) do |n, o|
+  #     o[n] = book.at(n).text
+  #
+  #   end
+  # end
+  #
+  # puts @books.size
+  @books = []
+  xml.xpath("work").each do |w|
 
+      @books << w.xpath("best_book").text
+
+end
+@books
 
 
   render 'search'
