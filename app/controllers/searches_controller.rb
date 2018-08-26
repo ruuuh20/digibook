@@ -31,9 +31,9 @@ def goodreads
   #
   # puts @books.size
   @books = []
-  xml.xpath("work").each do |w|
+  xml.search("best_book").map do |w|
 
-      @books << w.xpath("best_book").text
+      @books << w.xpath("title").text
 
 end
 @books

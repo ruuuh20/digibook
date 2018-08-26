@@ -6,5 +6,9 @@
 <% end %>
 
 <div>
-  <%= @books if @resp %>
+  <% if @resp  %>
+    <% @books.each do |book| %>
+      <h1><%= book %></h1>
+    <% end %>
+  <% end %>
 </div>
