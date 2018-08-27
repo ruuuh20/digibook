@@ -3,6 +3,6 @@ Rails.application.routes.draw do
  resources :books
  root 'books#index'
  get '/search', to: 'searches#search'
- post '/search', to: 'searches#goodreads'
+ post '/search', to: 'searches#google_books'
 
 end

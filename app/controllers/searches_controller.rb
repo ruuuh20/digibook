@@ -9,7 +9,7 @@ class SearchesController < ApplicationController
 
 def goodreads
   @resp = Faraday.get 'https://www.goodreads.com/search/index.xml' do |req|
-    req.params['key'] = 'dOv4GIHVoXiC0HIj7jwA'
+    req.params['key'] = ENV['GOODREADS_KEY']
     # req.params['client_secret'] = client_secret
     req.params['q'] = params[:title]
 
@@ -20,7 +20,10 @@ def goodreads
   #     puts work.at(n).text
   #   end
   # end
+
+
   xml = Nokogiri::XML(@resp.body)
+
   # @books = xml.search('work').map do |book|
   #   %w[
   #     id average_rating best_book
@@ -38,6 +41,8 @@ def goodreads
 #       @books << w.xpath("title", "id").text
 #
 # end
+
+# use this one
 @new_array = []
 
   xml.search("best_book").each do |book|
@@ -46,22 +51,26 @@ def goodreads
     hash[:id] = book.xpath('id').text
     hash[:small_img] = book.xpath('small_img_url').text
     hash[:author] = book.xpath('author').xpath('name').text
-
     # binding.pry
     @new_array  << hash
 end
-
-# @array = []
-# xml.search("work").map do |x|
-#   hash = {}
-#   x.attributes.each do |attribute| # loop through all attributes in the matches found
-#     hash[attribute[1].name.to_sym] = attribute[1].value
-#   end
-#   @array << hash
-# end
-
-
   render 'search'
+end
+
+
+def google_books
+  @resp = Faraday.get 'https://www.googleapis.com/books/v1/volumes?' do |req|
+    req.params['key'] = ENV['GOOGLE_KEY']
+
+    req.params['q'] = params[:title]
+  end
+
+    body_hash = JSON.parse(@resp.body)
+    @books = body_hash["items"]
+
+    render 'search'
+
+
 end
 
 end
