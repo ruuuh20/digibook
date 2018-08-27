@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 
 class SearchesController < ApplicationController
 
@@ -30,13 +31,34 @@ def goodreads
   # end
   #
   # puts @books.size
-  @books = []
-  xml.search("best_book").map do |w|
+  # @books = []
 
-      @books << w.xpath("title").text
+#   xml.search("best_book").map do |w|
+#
+#       @books << w.xpath("title", "id").text
+#
+# end
+@new_array = []
 
+  xml.search("best_book").each do |book|
+    hash = {}
+    hash[:title] = book.xpath("title").text
+    hash[:id] = book.xpath('id').text
+    hash[:small_img] = book.xpath('small_img_url').text
+    hash[:author] = book.xpath('author').xpath('name').text
+
+    # binding.pry
+    @new_array  << hash
 end
-@books
+
+# @array = []
+# xml.search("work").map do |x|
+#   hash = {}
+#   x.attributes.each do |attribute| # loop through all attributes in the matches found
+#     hash[attribute[1].name.to_sym] = attribute[1].value
+#   end
+#   @array << hash
+# end
 
 
   render 'search'
