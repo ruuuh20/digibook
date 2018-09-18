@@ -73,4 +73,8 @@ def google_books
 
 end
 
+def book
+  
+end
+
 end
