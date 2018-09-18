@@ -51,10 +51,10 @@
 <% if @books  %>
 
 
-      <% @books.in_groups_of(3, false).each do |group| %>
+      <% @books.in_groups_of(4, false).each do |group| %>
         <div class="columns">
           <% group.each do |book| %>
-              <div class="column is-one-third">
+              <div class="column is-one-quarter">
                 <div class="card">
                   <div class="card-image">
                   <figure class="image is-4by3">
